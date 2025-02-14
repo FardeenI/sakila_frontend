@@ -8,6 +8,7 @@ import FilmsPage from './FilmsPage.jsx'
 import React from 'react'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import NotFoundPage from './NotFoundPage.jsx'
+import CustomersPage from './CustomersPage.jsx'
 
 const router = createBrowserRouter([
   {
@@ -20,8 +21,8 @@ const router = createBrowserRouter([
     element: <FilmsPage />
   },
   {
-    path:'/nonsense',
-    element: <App />
+    path:'/customers',
+    element: <CustomersPage />
   }
 ])
 

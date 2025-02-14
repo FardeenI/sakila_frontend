@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
+import Navbar from './Navbar';
 
 export default function FilmsPage() {
 
@@ -16,6 +17,7 @@ useEffect(() => {
     
     return (
         <>
+            <Navbar/>
             <h1>This is the films page</h1>
             <div>
             {
