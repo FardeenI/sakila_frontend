@@ -18,7 +18,7 @@ useEffect(() => {
     return (
         <>
             <Navbar/>
-            <h1>This is the Customers page</h1>
+            <h1>This is the Customers page!</h1>
             <table>
                 <thead>
                     <th>ID</th>

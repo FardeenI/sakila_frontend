@@ -46,7 +46,7 @@ export default function LandingPage() {
             >
             {
                 top5FilmsArray.map((film, index) => (
-                    <div key={index} style={{padding:"10px", backgroundColor:"#D5FFFF", margin:"10px"}}>
+                    <div key={index} style={{padding:"10px", backgroundColor:"#D5FFFF", margin:"10px", borderStyle:"solid", borderWidth:"4px", borderColor:"black"}}>
                     <span>{film.title}</span>
                     <br></br>
                     <span> Rented: {film.rented} </span>
@@ -70,7 +70,7 @@ export default function LandingPage() {
             >
                 {
                     top5ActorsArray.map((actor, index) => (
-                        <div key={index} style={{padding:"10px", backgroundColor:"#ffe4ed", margin:"10px"}}>
+                        <div key={index} style={{padding:"10px", backgroundColor:"#ffe4ed", margin:"10px", borderStyle:"solid", borderWidth:"4px", borderColor:"black"}}>
                         <span>{actor.first_name} {actor.last_name}</span>
                         <br></br>
                         <span> Rented: {actor.rented} </span>
