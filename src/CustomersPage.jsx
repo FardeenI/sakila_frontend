@@ -1,4 +1,4 @@
-import CustomersPaginationTable from './CustomersPaginationTable';
+import CustomersPaginationSearchTable from './CustomersPaginationSearchTable';
 import Navbar from './Navbar';
 
 export default function CustomersPage() {
@@ -6,7 +6,7 @@ export default function CustomersPage() {
         <>
             <Navbar/>
             <h1>This is the Customers page!</h1>
-            <CustomersPaginationTable />
+            <CustomersPaginationSearchTable />
         </>
     )
 }

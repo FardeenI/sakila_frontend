@@ -84,24 +84,18 @@ TablePaginationActions.propTypes = {
   rowsPerPage: PropTypes.number.isRequired,
 };
 
-export default function CustomersPaginationTable() {
+export default function FilmsPaginationSearchTable() {
 
-  const [customersArray, setCustomersArray] = useState([])
+  const [filmsArray, setFilmsArray] = useState([])
 
-  const getCustomersApi = async() => {
-      const customersResponse = await axios.get('http://127.0.0.1:8080/customers');
-      setCustomersArray(customersResponse.data)
+  const getFilmsApi = async() => {
+      const filmsResponse = await axios.get('http://127.0.0.1:8080/everyFilmByActor');
+      setFilmsArray(filmsResponse.data)
   };
 
   useEffect(() => {
-      getCustomersApi()
+      getFilmsApi()
   }, [])
-
-
-
-
-
-
   
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
@@ -117,19 +111,15 @@ export default function CustomersPaginationTable() {
 
   const [search, setSearch] = useState('')
   
-  const [customersFilter, setFilter] = React.useState('');
+  const [filmsFilter, setFilter] = React.useState('');
 
   const handleChange = (event) => {
     setFilter(event.target.value);
   };
 
-
-
-
   return (
     <>
-    <div style={{display:"flex", float:"right"}}>
-    <Box
+    <div style={{display:"flex", float:"right"}}><Box
       component="form"
       sx={{ '& > :not(style)': { m: 1, width: '25ch' } }}
       noValidate
@@ -143,52 +133,57 @@ export default function CustomersPaginationTable() {
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          value={customersFilter}
+          value={filmsFilter}
           label="Age"
           onChange={handleChange}
         >
-          <MenuItem value={"customer_id"}>Customer ID</MenuItem>
-          <MenuItem value={"first_name"}>First Name</MenuItem>
-          <MenuItem value={"last_name"}>Last Name</MenuItem>
+          <MenuItem value={"title"}>Film Title</MenuItem>
+          <MenuItem value={"actor_name"}>Actor Name</MenuItem>
+          <MenuItem value={"genre"}>Genre</MenuItem>
         </Select>
-        {console.log(customersFilter)}
-        {console.log(typeof customersFilter)}
       </FormControl>
-    </Box>
-    </div>
+    </Box></div>
     <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 300 }} aria-label="custom pagination table">
+      <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
         <TableBody>
             <TableRow key={"film_columns"}>
-              <TableCell style={{ width: 160 }} component="th" scope="row">
+              <TableCell style={{ width: 160 }} align="right">
                 ID
               </TableCell>
-              <TableCell style={{ width: 160 }}>
-                Name
+              <TableCell style={{ width: 160 }} align="right">
+                Title
               </TableCell>
-              <TableCell style={{ width: 160 }}>
-                Email
+              <TableCell style={{ width: 160 }} align="right">
+                Description
+              </TableCell>
+              <TableCell style={{ width: 160 }} align="right">
+                Genre
+              </TableCell>
+              <TableCell style={{ width: 160 }} align="right">
+                Rating
               </TableCell>
             </TableRow>
 
           {
-            customersArray.filter((customer) => {
-            if (typeof customer[customersFilter] === 'string') {
-              return customer[customersFilter].toLowerCase().includes(search.toLowerCase());
-            } 
-            else if (typeof value === 'number') {
-              return customer[customersFilter].toString().includes(search);
-            }
-          }).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((customer) => (
-            <TableRow key={customer.customer_id}>
-              <TableCell component="th" scope="row">
-                {customer.customer_id}
+          filmsArray.filter((film) => {
+            return search.toLowerCase() === '' ? film : film[filmsFilter].toLowerCase().includes(search.toLowerCase())
+          }).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+          .map((film) => (
+            <TableRow key={film.film_id}>
+              <TableCell style={{ width: 160 }} align="right">
+                {film.film_id}
               </TableCell>
-              <TableCell component="th" scope="row">
-                {customer.first_name} {customer.last_name}
+              <TableCell style={{ width: 160 }} align="right">
+                {film.title}
               </TableCell>
-              <TableCell component="td" scope="row">
-                {customer.email}
+              <TableCell style={{ width: 160 }} align="right">
+                {film.description}
+              </TableCell>
+              <TableCell style={{ width: 160 }} align="right">
+                {film.genre}
+              </TableCell>
+              <TableCell style={{ width: 160 }} align="right">
+                {film.rating}
               </TableCell>
             </TableRow>
           ))}
@@ -199,7 +194,7 @@ export default function CustomersPaginationTable() {
             <TablePagination
               rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
               colSpan={3}
-              count={customersArray.length}
+              count={filmsArray.length}
               rowsPerPage={rowsPerPage}
               page={page}
               slotProps={{
@@ -219,9 +214,5 @@ export default function CustomersPaginationTable() {
       </Table>
     </TableContainer>
     </>
-
-
-
-    
   );
 }

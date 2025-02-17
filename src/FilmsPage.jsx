@@ -1,5 +1,5 @@
 import Navbar from './Navbar';
-import CustomPaginationActionsTable from './CustomPaginationActionsTable';
+import FilmsPaginationSearchTable from './FilmsPaginationSearchTable';
 
 export default function FilmsPage() {
     
@@ -7,7 +7,7 @@ export default function FilmsPage() {
         <>
             <Navbar/>
             <h1>This is the films page!</h1>
-            <CustomPaginationActionsTable />
+            <FilmsPaginationSearchTable />
         </>
     )
 }
