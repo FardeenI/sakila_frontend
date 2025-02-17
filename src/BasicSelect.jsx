@@ -6,28 +6,31 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
 export default function BasicSelect() {
-  const [filter, setFilter] = React.useState('');
+  const [filmsFilter, setFilter] = React.useState('');
 
   const handleChange = (event) => {
     setFilter(event.target.value);
   };
 
   return (
+    <>
     <Box sx={{ '& > :not(style)': { m: 1, width: '25ch' } }}>
       <FormControl fullWidth>
         <InputLabel id="demo-simple-select-label">Filters</InputLabel>
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          value={filter}
+          value={filmsFilter}
           label="Age"
           onChange={handleChange}
         >
-          <MenuItem value={"film_title"}>Film Title</MenuItem>
+          <MenuItem value={"title"}>Film Title</MenuItem>
           <MenuItem value={"actor_name"}>Actor Name</MenuItem>
           <MenuItem value={"genre"}>Genre</MenuItem>
         </Select>
+        {console.log(typeof filmsFilter)}
       </FormControl>
     </Box>
+    </>
   );
 }

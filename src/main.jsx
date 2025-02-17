@@ -23,7 +23,7 @@ const router = createBrowserRouter([
   {
     path:'/customers',
     element: <CustomersPage />
-  },
+  }
 ])
 
 createRoot(document.getElementById('root')).render(

@@ -17,8 +17,11 @@ import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import LastPageIcon from '@mui/icons-material/LastPage';
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-import BasicTextFields from './BasicTextFields';
-import BasicSelect from './BasicSelect';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import TextField from '@mui/material/TextField';
 
 function TablePaginationActions(props) {
   const theme = useTheme();
@@ -112,9 +115,47 @@ export default function CustomersPaginationTable() {
     setPage(0);
   };
 
+  const [search, setSearch] = useState('')
+  
+  const [customersFilter, setFilter] = React.useState('');
+
+  const handleChange = (event) => {
+    setFilter(event.target.value);
+  };
+
+
+
+
   return (
     <>
-    <div style={{display:"flex", float:"right"}}><BasicTextFields/><BasicSelect/></div>
+    <div style={{display:"flex", float:"right"}}>
+    <Box
+      component="form"
+      sx={{ '& > :not(style)': { m: 1, width: '25ch' } }}
+      noValidate
+      autoComplete="off"
+    >
+      <TextField id="outlined-basic" label="Enter Search Filter" variant="outlined" onChange={(e) => setSearch(e.target.value)}/>
+    </Box>
+    <Box sx={{ '& > :not(style)': { m: 1, width: '25ch' } }}>
+      <FormControl fullWidth>
+        <InputLabel id="demo-simple-select-label">Filters</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={customersFilter}
+          label="Age"
+          onChange={handleChange}
+        >
+          <MenuItem value={"customer_id"}>Customer ID</MenuItem>
+          <MenuItem value={"first_name"}>First Name</MenuItem>
+          <MenuItem value={"last_name"}>Last Name</MenuItem>
+        </Select>
+        {console.log(customersFilter)}
+        {console.log(typeof customersFilter)}
+      </FormControl>
+    </Box>
+    </div>
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 300 }} aria-label="custom pagination table">
         <TableBody>
@@ -129,10 +170,16 @@ export default function CustomersPaginationTable() {
                 Email
               </TableCell>
             </TableRow>
-          {(rowsPerPage > 0
-            ? customersArray.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-            : customersArray
-          ).map((customer) => (
+
+          {
+            customersArray.filter((customer) => {
+            if (typeof customer[customersFilter] === 'string') {
+              return customer[customersFilter].toLowerCase().includes(search.toLowerCase());
+            } 
+            else if (typeof value === 'number') {
+              return customer[customersFilter].toString().includes(search);
+            }
+          }).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((customer) => (
             <TableRow key={customer.customer_id}>
               <TableCell component="th" scope="row">
                 {customer.customer_id}
@@ -172,5 +219,9 @@ export default function CustomersPaginationTable() {
       </Table>
     </TableContainer>
     </>
+
+
+
+    
   );
 }

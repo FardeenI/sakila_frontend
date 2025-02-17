@@ -17,8 +17,11 @@ import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import LastPageIcon from '@mui/icons-material/LastPage';
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-import BasicTextFields from './BasicTextFields';
-import BasicSelect from './BasicSelect';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import TextField from '@mui/material/TextField';
 
 function TablePaginationActions(props) {
   const theme = useTheme();
@@ -86,7 +89,7 @@ export default function CustomPaginationActionsTable() {
   const [filmsArray, setFilmsArray] = useState([])
 
   const getFilmsApi = async() => {
-      const filmsResponse = await axios.get('http://127.0.0.1:8080/films');
+      const filmsResponse = await axios.get('http://127.0.0.1:8080/filmsmodified');
       setFilmsArray(filmsResponse.data)
   };
 
@@ -112,9 +115,40 @@ export default function CustomPaginationActionsTable() {
     setPage(0);
   };
 
+  const [search, setSearch] = useState('')
+  
+  const [filmsFilter, setFilter] = React.useState('');
+
+  const handleChange = (event) => {
+    setFilter(event.target.value);
+  };
+
   return (
     <>
-    <div style={{display:"flex", float:"right"}}><BasicTextFields/><BasicSelect/></div>
+    <div style={{display:"flex", float:"right"}}><Box
+      component="form"
+      sx={{ '& > :not(style)': { m: 1, width: '25ch' } }}
+      noValidate
+      autoComplete="off"
+    >
+      <TextField id="outlined-basic" label="Enter Search Filter" variant="outlined" onChange={(e) => setSearch(e.target.value)}/>
+    </Box>
+    <Box sx={{ '& > :not(style)': { m: 1, width: '25ch' } }}>
+      <FormControl fullWidth>
+        <InputLabel id="demo-simple-select-label">Filters</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={filmsFilter}
+          label="Age"
+          onChange={handleChange}
+        >
+          <MenuItem value={"title"}>Film Title</MenuItem>
+          <MenuItem value={"actor_name"}>Actor Name</MenuItem>
+          <MenuItem value={"genre"}>Genre</MenuItem>
+        </Select>
+      </FormControl>
+    </Box></div>
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
         <TableBody>
@@ -129,6 +163,9 @@ export default function CustomPaginationActionsTable() {
                 Description
               </TableCell>
               <TableCell style={{ width: 160 }} align="right">
+                Genre
+              </TableCell>
+              <TableCell style={{ width: 160 }} align="right">
                 Rating
               </TableCell>
               <TableCell style={{ width: 160 }} align="right">
@@ -138,10 +175,12 @@ export default function CustomPaginationActionsTable() {
                 Release Year
               </TableCell>
             </TableRow>
-          {(rowsPerPage > 0
-            ? filmsArray.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-            : filmsArray
-          ).map((film) => (
+
+          {
+          filmsArray.filter((film) => {
+            return search.toLowerCase() === '' ? film : film[filmsFilter].toLowerCase().includes(search)
+          }).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+          .map((film) => (
             <TableRow key={film.film_id}>
               <TableCell component="th" scope="row">
                 {film.film_id}
@@ -151,6 +190,9 @@ export default function CustomPaginationActionsTable() {
               </TableCell>
               <TableCell style={{ width: 160 }} align="right">
                 {film.description}
+              </TableCell>
+              <TableCell style={{ width: 160 }} align="right">
+                {film.genre}
               </TableCell>
               <TableCell style={{ width: 160 }} align="right">
                 {film.rating}
