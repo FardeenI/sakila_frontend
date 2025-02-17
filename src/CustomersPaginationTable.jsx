@@ -81,17 +81,17 @@ TablePaginationActions.propTypes = {
   rowsPerPage: PropTypes.number.isRequired,
 };
 
-export default function CustomPaginationActionsTable() {
+export default function CustomersPaginationTable() {
 
-  const [filmsArray, setFilmsArray] = useState([])
+  const [customersArray, setCustomersArray] = useState([])
 
-  const getFilmsApi = async() => {
-      const filmsResponse = await axios.get('http://127.0.0.1:8080/films');
-      setFilmsArray(filmsResponse.data)
+  const getCustomersApi = async() => {
+      const customersResponse = await axios.get('http://127.0.0.1:8080/customers');
+      setCustomersArray(customersResponse.data)
   };
 
   useEffect(() => {
-      getFilmsApi()
+      getCustomersApi()
   }, [])
 
 
@@ -116,50 +116,32 @@ export default function CustomPaginationActionsTable() {
     <>
     <div style={{display:"flex", float:"right"}}><BasicTextFields/><BasicSelect/></div>
     <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
+      <Table sx={{ minWidth: 300 }} aria-label="custom pagination table">
         <TableBody>
             <TableRow key={"film_columns"}>
-              <TableCell component="th" scope="row">
+              <TableCell style={{ width: 160 }} component="th" scope="row">
                 ID
               </TableCell>
-              <TableCell style={{ width: 160 }} align="right">
-                Title
+              <TableCell style={{ width: 160 }}>
+                Name
               </TableCell>
-              <TableCell style={{ width: 160 }} align="right">
-                Description
-              </TableCell>
-              <TableCell style={{ width: 160 }} align="right">
-                Rating
-              </TableCell>
-              <TableCell style={{ width: 160 }} align="right">
-                Special Features
-              </TableCell>
-              <TableCell style={{ width: 160 }} align="right">
-                Release Year
+              <TableCell style={{ width: 160 }}>
+                Email
               </TableCell>
             </TableRow>
           {(rowsPerPage > 0
-            ? filmsArray.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-            : filmsArray
-          ).map((film) => (
-            <TableRow key={film.film_id}>
+            ? customersArray.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+            : customersArray
+          ).map((customer) => (
+            <TableRow key={customer.customer_id}>
               <TableCell component="th" scope="row">
-                {film.film_id}
+                {customer.customer_id}
               </TableCell>
               <TableCell component="th" scope="row">
-                {film.title}
+                {customer.first_name} {customer.last_name}
               </TableCell>
-              <TableCell style={{ width: 160 }} align="right">
-                {film.description}
-              </TableCell>
-              <TableCell style={{ width: 160 }} align="right">
-                {film.rating}
-              </TableCell>
-              <TableCell style={{ width: 160 }} align="right">
-                {film.special_features}
-              </TableCell>
-              <TableCell style={{ width: 160 }} align="right">
-                {film.release_year}
+              <TableCell component="td" scope="row">
+                {customer.email}
               </TableCell>
             </TableRow>
           ))}
@@ -170,7 +152,7 @@ export default function CustomPaginationActionsTable() {
             <TablePagination
               rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
               colSpan={3}
-              count={filmsArray.length}
+              count={customersArray.length}
               rowsPerPage={rowsPerPage}
               page={page}
               slotProps={{
