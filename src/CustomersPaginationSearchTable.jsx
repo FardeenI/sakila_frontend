@@ -97,12 +97,6 @@ export default function CustomersPaginationSearchTable() {
       getCustomersApi()
   }, [])
 
-
-
-
-
-
-  
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 

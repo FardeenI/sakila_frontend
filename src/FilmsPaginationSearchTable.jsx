@@ -119,30 +119,32 @@ export default function FilmsPaginationSearchTable() {
 
   return (
     <>
-    <div style={{display:"flex", float:"right"}}><Box
+    <div style={{display:"flex", float:"right"}}>
+      <Box
       component="form"
       sx={{ '& > :not(style)': { m: 1, width: '25ch' } }}
       noValidate
       autoComplete="off"
-    >
-      <TextField id="outlined-basic" label="Enter Search Filter" variant="outlined" onChange={(e) => setSearch(e.target.value)}/>
-    </Box>
-    <Box sx={{ '& > :not(style)': { m: 1, width: '25ch' } }}>
-      <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">Filters</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={filmsFilter}
-          label="Age"
-          onChange={handleChange}
-        >
-          <MenuItem value={"title"}>Film Title</MenuItem>
-          <MenuItem value={"actor_name"}>Actor Name</MenuItem>
-          <MenuItem value={"genre"}>Genre</MenuItem>
-        </Select>
-      </FormControl>
-    </Box></div>
+      >
+        <TextField id="outlined-basic" label="Enter Search Filter" variant="outlined" onChange={(e) => setSearch(e.target.value)}/>
+      </Box>
+      <Box sx={{ '& > :not(style)': { m: 1, width: '25ch' } }}>
+        <FormControl fullWidth>
+          <InputLabel id="demo-simple-select-label">Filters</InputLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={filmsFilter}
+            label="Age"
+            onChange={handleChange}
+          >
+            <MenuItem value={"title"}>Film Title</MenuItem>
+            <MenuItem value={"actor_name"}>Actor Name</MenuItem>
+            <MenuItem value={"genre"}>Genre</MenuItem>
+          </Select>
+        </FormControl>
+      </Box>
+    </div>
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
         <TableBody>
