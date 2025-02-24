@@ -111,7 +111,7 @@ export default function FilmsPaginationSearchTable() {
 
   const [search, setSearch] = useState('')
   
-  const [filmsFilter, setFilter] = React.useState('');
+  const [filmsFilter, setFilter] = React.useState('title');
 
   const handleChange = (event) => {
     setFilter(event.target.value);
@@ -168,10 +168,12 @@ export default function FilmsPaginationSearchTable() {
 
           {
           filmsArray.filter((film) => {
-            return search.toLowerCase() === '' ? film : film[filmsFilter].toLowerCase().includes(search.toLowerCase())
+            const filteredFilms = search.toLowerCase() === '' ? film : film[filmsFilter].toLowerCase().includes(search.toLowerCase())
+            console.log(filteredFilms)
+            return filteredFilms
           }).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
           .map((film) => (
-            <TableRow key={film.film_id}>
+            <TableRow key={film.title+film.actor_name}>
               <TableCell style={{ width: 160 }} align="right">
                 {film.film_id}
               </TableCell>
