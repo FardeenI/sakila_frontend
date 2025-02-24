@@ -1,8 +1,1 @@
-# React + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This repository contains the source code for the frontend of my implementation of the NJIT Spring '25 CS490-104 Individual Project (Sakila Database Store Clerk Web Interface), currently supporting 7 of the 14 total deliverables. This frontend utilizes React js. Ongoing development from Milestone 2 to Milestone 3.
