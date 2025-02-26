@@ -39,7 +39,7 @@ export default function FilmDetailsPopup(props) {
             <span style={{ fontWeight: 'bold' , color:'black'}}>Release Year: {props.filmRelease}</span>
             <br></br>
             <br></br>
-            <span style={{ fontWeight: 'bold' , color:'black'}}>Rental Rate: {props.filmeRental}</span>
+            <span style={{ fontWeight: 'bold' , color:'black'}}>Rental Rate: {props.filmRental}</span>
             <br></br>
             <br></br>
             <span style={{ fontWeight: 'bold' , color:'black'}}>Length: {props.filmLength} minutes</span>
