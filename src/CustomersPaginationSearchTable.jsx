@@ -117,6 +117,10 @@ export default function CustomersPaginationSearchTable() {
     setFilter(event.target.value);
   };
 
+  const [hoveredRowId, setHoveredRowId] = useState(null);
+  const handleMouseEnter = (id) => setHoveredRowId(id);
+  const handleMouseLeave = () => setHoveredRowId(null);
+
   return (
     <>
     <div style={{display:"flex", float:"right"}}>
@@ -169,7 +173,9 @@ export default function CustomersPaginationSearchTable() {
               return customer[customersFilter].toString().includes(search);
             }
           }).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((customer) => (
-            <TableRow key={customer.customer_id}>
+            <TableRow key={customer.customer_id} onMouseEnter={() => handleMouseEnter(customer.customer_id)}
+            onMouseLeave={handleMouseLeave}
+            sx={{ backgroundColor: hoveredRowId === customer.customer_id ? 'lightgray' : 'transparent', cursor:'pointer'}}>
               <TableCell component="th" scope="row">
                 {customer.customer_id}
               </TableCell>

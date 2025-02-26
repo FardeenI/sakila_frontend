@@ -22,7 +22,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import TextField from '@mui/material/TextField';
-
+import FilmsPagePopup from './FilmsPagePopup';
 function TablePaginationActions(props) {
   const theme = useTheme();
   const { count, page, rowsPerPage, onPageChange } = props;
@@ -117,6 +117,10 @@ export default function FilmsPaginationSearchTable() {
     setFilter(event.target.value);
   };
 
+  const [hoveredRowId, setHoveredRowId] = useState(null);
+  const handleMouseEnter = (id) => setHoveredRowId(id);
+  const handleMouseLeave = () => setHoveredRowId(null);
+
   return (
     <>
     <div style={{display:"flex", float:"right"}}>
@@ -164,33 +168,42 @@ export default function FilmsPaginationSearchTable() {
               <TableCell style={{ width: 160 }} align="right">
                 Rating
               </TableCell>
+              <TableCell style={{ width: 160 }} align="right">
+                Details
+              </TableCell>  
             </TableRow>
 
           {
           filmsArray.filter((film) => {
             const filteredFilms = search.toLowerCase() === '' ? film : film[filmsFilter].toLowerCase().includes(search.toLowerCase())
-            console.log(filteredFilms)
             return filteredFilms
           }).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
           .map((film) => (
-            <TableRow key={film.title+film.actor_name}>
-              <TableCell style={{ width: 160 }} align="right">
+            <TableRow key={film.title+film.actor_name} onMouseEnter={() => handleMouseEnter(film.film_id)}
+            onMouseLeave={handleMouseLeave}
+            sx={{ backgroundColor: hoveredRowId === film.film_id ? 'lightgray' : 'transparent'}}>
+              <TableCell align="right">
                 {film.film_id}
               </TableCell>
-              <TableCell style={{ width: 160 }} align="right">
+              <TableCell align="right">
                 {film.title}
               </TableCell>
-              <TableCell style={{ width: 160 }} align="right">
+              <TableCell align="right">
                 {film.description}
               </TableCell>
-              <TableCell style={{ width: 160 }} align="right">
+              <TableCell align="right">
                 {film.genre}
               </TableCell>
-              <TableCell style={{ width: 160 }} align="right">
+              <TableCell align="right">
                 {film.rating}
               </TableCell>
+              <TableCell align="right">
+                <FilmsPagePopup filmTitle={film.title} filmDescription={film.description} filmRelease={film.release_year} filmRental={film.rental_rate} filmLength={film.length} filmReplacement={film.replacement_cost} filmFeatures={film.special_features}/>
+              </TableCell>
             </TableRow>
-          ))}
+
+          ))
+          }
           
         </TableBody>
         <TableFooter>

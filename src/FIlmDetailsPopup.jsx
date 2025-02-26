@@ -28,20 +28,24 @@ export default function FilmDetailsPopup(props) {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">
+        <DialogTitle id="alert-dialog-title" sx={{ fontWeight: 'bold', color:'black'}}>
           {props.filmTitle}
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            <span>Description: {props.filmDescription}</span>
+            <span style={{ fontWeight: 'bold', color:'black'}}>Description: {props.filmDescription}</span>
             <br></br>
-            <span>Genre: {props.filmGenre}</span>
             <br></br>
-            <span>Release Year: {props.filmRelease}</span>
+            <span style={{ fontWeight: 'bold', color:'black'}}>Genre: {props.filmGenre}</span>
             <br></br>
-            <span>Rating: {props.filmRating}</span>
             <br></br>
-            <span>Rented: {props.rentedCount}</span>
+            <span style={{ fontWeight: 'bold', color:'black'}}>Release Year: {props.filmRelease}</span>
+            <br></br>
+            <br></br>
+            <span style={{ fontWeight: 'bold', color:'black'}}>Rating: {props.filmRating}</span>
+            <br></br>
+            <br></br>
+            <span style={{ fontWeight: 'bold', color:'black'}}>Rented: {props.rentedCount}</span>
           </DialogContentText>
         </DialogContent>
         <DialogActions>

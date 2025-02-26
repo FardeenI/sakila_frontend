@@ -9,6 +9,7 @@ import React from 'react'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import NotFoundPage from './NotFoundPage.jsx'
 import CustomersPage from './CustomersPage.jsx'
+import Scrap from './scrap.jsx'
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
   {
     path:'/customers',
     element: <CustomersPage />
+  },
+  {
+    path:'/scrap',
+    element: <Scrap />
   }
 ])
 
