@@ -5,6 +5,8 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import { useState, useEffect } from 'react'
+import axios from 'axios'
 
 export default function FilmDetailsPopup(props) {
   const [open, setOpen] = React.useState(false);
@@ -16,6 +18,17 @@ export default function FilmDetailsPopup(props) {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const [rentableFilms, setRentableFilmsArray] = useState([])
+
+  const getRentableFilmsApi = async() => {
+      const rentableFilmsResponse = await axios.get(`http://127.0.0.1:8080/films/${props.filmID}/rentable`);
+      setRentableFilmsArray(rentableFilmsResponse.data)
+  };
+
+  useEffect(() => {
+      getRentableFilmsApi()
+  }, [])
 
   return (
     <React.Fragment>
@@ -49,6 +62,14 @@ export default function FilmDetailsPopup(props) {
             <br></br>
             <br></br>
             <span style={{ fontWeight: 'bold' , color:'black'}}>Special Features: {props.filmFeatures}</span>
+            <br></br>
+            <br></br>
+            <span style={{ fontWeight: 'bold' , color:'black'}}>Available Inventory IDs: </span>
+            {
+                rentableFilms.map((rentableFilmID, index) => (
+                  <span key={index} style={{ fontWeight: 'bold' , color:'black'}}>{rentableFilmID.rentableID}  |  </span>
+                ))
+            }
           </DialogContentText>
         </DialogContent>
         <DialogActions>

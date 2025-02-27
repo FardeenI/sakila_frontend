@@ -198,7 +198,7 @@ export default function FilmsPaginationSearchTable() {
                 {film.rating}
               </TableCell>
               <TableCell align="right">
-                <FilmsPagePopup filmTitle={film.title} filmDescription={film.description} filmRelease={film.release_year} filmRental={film.rental_rate} filmLength={film.length} filmReplacement={film.replacement_cost} filmFeatures={film.special_features}/>
+                <FilmsPagePopup filmID={film.film_id} filmTitle={film.title} filmDescription={film.description} filmRelease={film.release_year} filmRental={film.rental_rate} filmLength={film.length} filmReplacement={film.replacement_cost} filmFeatures={film.special_features}/>
               </TableCell>
             </TableRow>
 
