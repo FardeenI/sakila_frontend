@@ -7,6 +7,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { useState, useEffect } from 'react'
 import axios from 'axios'
+import NumberInputForm from './NumberInputForm';
 
 export default function FilmDetailsPopup(props) {
   const [open, setOpen] = React.useState(false);
@@ -21,14 +22,19 @@ export default function FilmDetailsPopup(props) {
 
   const [rentableFilms, setRentableFilmsArray] = useState([])
 
+  const [changedRentablesFlag, setRentablesFlag] = useState(false)
+  
   const getRentableFilmsApi = async() => {
       const rentableFilmsResponse = await axios.get(`http://127.0.0.1:8080/films/${props.filmID}/rentable`);
       setRentableFilmsArray(rentableFilmsResponse.data)
   };
 
+  // In this use effect, upon changing the rentableFilms array OR upon clicking the button to open the films page popup, the rentable films response from the endpoint is dynamically updated on the frontend
   useEffect(() => {
       getRentableFilmsApi()
-  }, [])
+      setRentablesFlag(false)
+  }, [changedRentablesFlag, open])
+
 
   return (
     <React.Fragment>
@@ -70,6 +76,10 @@ export default function FilmDetailsPopup(props) {
                   <span key={index} style={{ fontWeight: 'bold' , color:'black'}}>{rentableFilmID.rentableID}  |  </span>
                 ))
             }
+            <br></br>
+            <br></br>
+            <NumberInputForm rentableFilms={rentableFilms} setPostFlag={setRentablesFlag}/> {/* In this component, we pass the function which changes the flag for keeping track of whether the rentable films array has been changed to the child component, the number input form*/}
+
           </DialogContentText>
         </DialogContent>
         <DialogActions>
