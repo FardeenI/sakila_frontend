@@ -189,7 +189,7 @@ export default function CustomersPaginationSearchTable() {
           }).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((customer) => (
             <TableRow key={customer.customer_id} onMouseEnter={() => handleMouseEnter(customer.customer_id)}
             onMouseLeave={handleMouseLeave}
-            sx={{ backgroundColor: hoveredRowId === customer.customer_id ? 'lightgray' : 'transparent', cursor:'pointer'}}>
+            sx={{ backgroundColor: hoveredRowId === customer.customer_id ? 'lightgray' : 'transparent'}}>
               <TableCell component="th" scope="row">
                 {customer.customer_id}
               </TableCell>
