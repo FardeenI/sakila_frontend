@@ -22,6 +22,8 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import TextField from '@mui/material/TextField';
+import Navbar from './Navbar';
+import AddNewCustomer from './AddNewCustomer';
 
 function TablePaginationActions(props) {
   const theme = useTheme();
@@ -84,6 +86,10 @@ TablePaginationActions.propTypes = {
   rowsPerPage: PropTypes.number.isRequired,
 };
 
+
+
+
+
 export default function CustomersPaginationSearchTable() {
 
   const [customersArray, setCustomersArray] = useState([])
@@ -95,7 +101,7 @@ export default function CustomersPaginationSearchTable() {
 
   useEffect(() => {
       getCustomersApi()
-  }, [])
+  }, [customersArray])
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
@@ -120,9 +126,16 @@ export default function CustomersPaginationSearchTable() {
   const [hoveredRowId, setHoveredRowId] = useState(null);
   const handleMouseEnter = (id) => setHoveredRowId(id);
   const handleMouseLeave = () => setHoveredRowId(null);
+  const handleNewCustomer = (customer) => {
+    setCustomersArray([...customersArray, customer])
+  };
 
   return (
     <>
+
+    <Navbar/>
+    <h1>This is the Customers page! <AddNewCustomer onNewCustomer={handleNewCustomer}/> </h1>
+
     <div style={{display:"flex", float:"right"}}>
     <Box
       component="form"
@@ -149,6 +162,7 @@ export default function CustomersPaginationSearchTable() {
       </FormControl>
     </Box>
     </div>
+
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 300 }} aria-label="custom pagination table">
         <TableBody>
@@ -213,10 +227,8 @@ export default function CustomersPaginationSearchTable() {
         </TableFooter>
       </Table>
     </TableContainer>
-    </>
-
-
-
     
+    
+    </>
   );
 }

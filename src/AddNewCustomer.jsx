@@ -11,7 +11,7 @@ import Box from '@mui/material/Box';
 import axios from 'axios';
 
 
-export default function AddNewCustomer() {
+export default function AddNewCustomer({onNewCustomer}) {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -110,7 +110,8 @@ export default function AddNewCustomer() {
 
     // POST HERE
     const response =  await axios.post('http://127.0.0.1:8080/customers', body) // This is the post request
-    console.log(response)
+    console.log(response.data)
+    onNewCustomer(response.data)
     setButtonColor('#2e7d32');
     setFirstName(""); // Clear input after submission
     setLastName("");
