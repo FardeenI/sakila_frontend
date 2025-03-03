@@ -47,9 +47,9 @@ export default function LandingPage() {
             {
                 top5FilmsArray.map((film, index) => (
                     <div key={index} style={{padding:"10px", backgroundColor:"#D5FFFF", margin:"10px", borderStyle:"solid", borderWidth:"4px", borderColor:"black"}}>
-                    <span>{film.title}</span>
+                    <span style={{ fontWeight: 'bold', color:'black'}}>{film.title}</span>
                     <br></br>
-                    <span> Rented: {film.rented} </span>
+                    <span style={{ fontWeight: 'bold', color:'black'}}> Rented: {film.rented} </span>
                     <br></br>
                     <span><FilmDetailsPopup filmDescription={film.description} filmRelease={film.release_year} filmRating={film.rating} filmTitle={film.title} rentedCount={film.rented} filmGenre={film.genre}/></span>
                     <br></br>
@@ -71,9 +71,9 @@ export default function LandingPage() {
                 {
                     top5ActorsArray.map((actor, index) => (
                         <div key={index} style={{padding:"10px", backgroundColor:"#ffe4ed", margin:"10px", borderStyle:"solid", borderWidth:"4px", borderColor:"black"}}>
-                        <span>{actor.first_name} {actor.last_name}</span>
+                        <span style={{ fontWeight: 'bold', color:'black'}}>{actor.first_name} {actor.last_name}</span>
                         <br></br>
-                        <span> Rented: {actor.rented} </span>
+                        <span style={{ fontWeight: 'bold', color:'black'}}> Rented: {actor.rented} </span>
                         <br></br>
                         <span><ActorDetailsPopup actorName={`${actor.first_name} ${actor.last_name}`} actorID={actor.actor_id}/></span>
                         <br></br>

@@ -24,6 +24,7 @@ import Select from '@mui/material/Select';
 import TextField from '@mui/material/TextField';
 import Navbar from './Navbar';
 import AddNewCustomer from './AddNewCustomer';
+import CustomersPagePopup from './CustomersPagePopup';
 
 function TablePaginationActions(props) {
   const theme = useTheme();
@@ -87,9 +88,6 @@ TablePaginationActions.propTypes = {
 };
 
 
-
-
-
 export default function CustomersPaginationSearchTable() {
 
   const [customersArray, setCustomersArray] = useState([])
@@ -116,7 +114,6 @@ export default function CustomersPaginationSearchTable() {
   };
 
   const [search, setSearch] = useState('')
-  
   const [customersFilter, setFilter] = React.useState('first_name');
 
   const handleChange = (event) => {
@@ -126,13 +123,13 @@ export default function CustomersPaginationSearchTable() {
   const [hoveredRowId, setHoveredRowId] = useState(null);
   const handleMouseEnter = (id) => setHoveredRowId(id);
   const handleMouseLeave = () => setHoveredRowId(null);
+
   const handleNewCustomer = (customer) => {
     setCustomersArray([...customersArray, customer])
   };
 
   return (
     <>
-
     <Navbar/>
     <h1>This is the Customers page! <AddNewCustomer onNewCustomer={handleNewCustomer}/> </h1>
 
@@ -176,6 +173,9 @@ export default function CustomersPaginationSearchTable() {
               <TableCell style={{ width: 160 }}>
                 Email
               </TableCell>
+              <TableCell style={{ width: 160 }}>
+                Details
+              </TableCell>
             </TableRow>
 
           {
@@ -198,6 +198,9 @@ export default function CustomersPaginationSearchTable() {
               </TableCell>
               <TableCell component="td" scope="row">
                 {customer.email}
+              </TableCell>
+              <TableCell component="td" scope="row">
+                <CustomersPagePopup customer_id={customer.customer_id} customerFirst={customer.first_name} customerLast={customer.last_name} customerEmail={customer.email} joinDate={customer.create_date}/>
               </TableCell>
             </TableRow>
           ))}
@@ -227,8 +230,6 @@ export default function CustomersPaginationSearchTable() {
         </TableFooter>
       </Table>
     </TableContainer>
-    
-    
     </>
   );
 }

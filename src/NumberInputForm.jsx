@@ -4,7 +4,6 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import { FormHelperText } from '@mui/material';
 
 export default function NumberInputForm(props) {
   
@@ -23,12 +22,13 @@ export default function NumberInputForm(props) {
 
   const handleChange = (e) => {
     setNumber(e.target.value);
+    if (e.target.value.trim() !== "") {
+      setError(false);
+      setHelperText("");
+    }
   };
 
-  // const handleSetData
-
-  const body = {"rentableID":props.rentableFilms[0]?.rentableID, "customer_id":number} // This '?' says basically that the statement will only exeute if the preceding clause is NOT NULL
-
+  const body = {"rentableID":props.rentableFilms[0]?.rentableID, "customer_id":number} // This '?' says basically that the statement will only execute if the preceding clause is NOT NULL
 
   const [error, setError] = useState(false);
   const [helperText, setHelperText] = useState("");

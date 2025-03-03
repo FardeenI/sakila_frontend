@@ -40,6 +40,14 @@ export default function AddNewCustomer({onNewCustomer}) {
   const [buttonColor, setButtonColor] = useState('#1976d2');
   const body = {"first_name":firstName, "last_name":lastName, "email":email} 
 
+  const [errorFirst, setErrorFirst] = useState(false);
+  const [errorLast, setErrorLast] = useState(false);
+  const [errorEmail, setErrorEmail] = useState(false);
+
+  const [helperTextFirst, setHelperTextFirst] = useState("");
+  const [helperTextLast, setHelperTextLast] = useState("");
+  const [helperTextEmail, setHelperTextEmail] = useState("");
+
   const handleChangeFirst = (e) => {
     const value = e.target.value;
     setFirstName(value);
@@ -68,15 +76,7 @@ export default function AddNewCustomer({onNewCustomer}) {
           setErrorEmail(false);
           setHelperTextEmail("");
       }
-  };
-
-  const [errorFirst, setErrorFirst] = useState(false);
-  const [errorLast, setErrorLast] = useState(false);
-  const [errorEmail, setErrorEmail] = useState(false);
-
-  const [helperTextFirst, setHelperTextFirst] = useState("");
-  const [helperTextLast, setHelperTextLast] = useState("");
-  const [helperTextEmail, setHelperTextEmail] = useState("");  
+  };  
 
   const handleSubmit = async () => {
 
