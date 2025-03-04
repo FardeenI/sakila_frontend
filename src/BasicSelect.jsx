@@ -28,7 +28,6 @@ export default function BasicSelect() {
           <MenuItem value={"actor_name"}>Actor Name</MenuItem>
           <MenuItem value={"genre"}>Genre</MenuItem>
         </Select>
-        {console.log(typeof filmsFilter)}
       </FormControl>
     </Box>
     </>

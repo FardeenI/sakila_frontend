@@ -19,13 +19,14 @@ export default function NumberInputForm(props) {
   }, [])
 
   const [number, setNumber] = useState("");
+  const [buttonColor, setButtonColor] = useState('#1976d2');
 
   const handleChange = (e) => {
     setNumber(e.target.value);
-    if (e.target.value.trim() !== "") {
-      setError(false);
-      setHelperText("");
-    }
+    setError(false);
+    setButtonColor('#1976d2');
+    setHelperText("");
+    
   };
 
   const body = {"rentableID":props.rentableFilms[0]?.rentableID, "customer_id":number} // This '?' says basically that the statement will only execute if the preceding clause is NOT NULL
@@ -55,11 +56,13 @@ export default function NumberInputForm(props) {
         // POST HERE
         const response =  await axios.post('http://127.0.0.1:8080/rentAmovie', body) // This is the post request
         props.setPostFlag(true) // This is an invocation of the function that we passed to the number input form as a prop, to change the flag for checking if any film has been rented to be true
-        console.log(response)
+        setButtonColor('#2e7d32');
+        setHelperText("Successfully rented DVD")
       }
       else {
         // Handle invalid Customer IDs
         setError(true)
+        setButtonColor('#d32f2f');
         setHelperText("Invalid Customer ID")
         return
       }
@@ -76,7 +79,7 @@ export default function NumberInputForm(props) {
       autoComplete="off"
     >
       <TextField id="enterCustomerID" label="Enter Customer ID" variant="outlined" value={number} onChange={handleChange} error={error} helperText={helperText}/>
-      <Button variant="contained" sx={{height:'7ch'}} onClick={handleSubmit}>
+      <Button variant="contained" sx={{backgroundColor: buttonColor, height:'7ch' }} onClick={handleSubmit}>
         Rent Movie
       </Button>
     </Box>

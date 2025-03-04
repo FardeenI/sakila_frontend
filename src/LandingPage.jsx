@@ -33,7 +33,7 @@ export default function LandingPage() {
     return (
         <>
             <Navbar/>
-            <h1>This is the landing page!</h1>
+            <h1>Sakila Website</h1>
             <h2>Here are the Top 5 Films:</h2>
             <Box sx={{ 
                     display: 'flex', 

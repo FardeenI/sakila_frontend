@@ -17,14 +17,6 @@ import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import LastPageIcon from '@mui/icons-material/LastPage';
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-import TextField from '@mui/material/TextField';
-import Navbar from './Navbar';
-import AddNewCustomer from './AddNewCustomer';
-import CustomersPagePopup from './CustomersPagePopup';
 
 function TablePaginationActions(props) {
   const theme = useTheme();
@@ -88,19 +80,19 @@ TablePaginationActions.propTypes = {
 };
 
 
-export default function CustomersPaginationSearchTable() {
+export default function RentalsPaginationTable(props) {
 
-  const [customersArray, setCustomersArray] = useState([])
+  const [rentalsArray, setRentalsArray] = useState([])
 
-  const getCustomersApi = async() => {
-      const customersResponse = await axios.get('http://127.0.0.1:8080/customers');
-      setCustomersArray(customersResponse.data)
+  const getRentalsApi = async() => {
+      const rentalsResponse = await axios.get(`http://127.0.0.1:8080/customers/${props.customer_id}/rentals`);
+      setRentalsArray(rentalsResponse.data)
   };
 
   useEffect(() => {
-      getCustomersApi()
-  }, [customersArray])
-
+      getRentalsApi()
+  }, [rentalsArray])
+  
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
@@ -113,105 +105,53 @@ export default function CustomersPaginationSearchTable() {
     setPage(0);
   };
 
-  const [search, setSearch] = useState('')
-  const [customersFilter, setFilter] = React.useState('first_name');
-
-  const handleChange = (event) => {
-    setFilter(event.target.value);
-  };
-
-  const [hoveredRowId, setHoveredRowId] = useState(null);
-  const handleMouseEnter = (id) => setHoveredRowId(id);
-  const handleMouseLeave = () => setHoveredRowId(null);
-
-  const handleNewCustomer = (customer) => {
-    setCustomersArray([...customersArray, customer])
-  };
-
   return (
     <>
-    <Navbar/>
-    <h1>Customers <AddNewCustomer onNewCustomer={handleNewCustomer}/> </h1>
-
-    <div style={{display:"flex", float:"right"}}>
-    <Box
-      component="form"
-      sx={{ '& > :not(style)': { m: 1, width: '25ch' } }}
-      noValidate
-      autoComplete="off"
-    >
-      <TextField id="outlined-basic" label="Enter Search Filter" variant="outlined" onChange={(e) => setSearch(e.target.value)}/>
-    </Box>
-    <Box sx={{ '& > :not(style)': { m: 1, width: '25ch' } }}>
-      <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">Filters</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={customersFilter}
-          label="Age"
-          onChange={handleChange}
-        >
-          <MenuItem value={"customer_id"}>Customer ID</MenuItem>
-          <MenuItem value={"first_name"}>First Name</MenuItem>
-          <MenuItem value={"last_name"}>Last Name</MenuItem>
-        </Select>
-      </FormControl>
-    </Box>
-    </div>
-
     <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 300 }} aria-label="custom pagination table">
+      <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
         <TableBody>
-            <TableRow key={"film_columns"}>
-              <TableCell style={{ width: 160 }} component="th" scope="row">
-                ID
+            <TableRow key={"rental_columns"}>
+              <TableCell style={{ width: 160 }} align="right">
+                Rental ID
               </TableCell>
-              <TableCell style={{ width: 160 }}>
-                Name
+              <TableCell style={{ width: 160 }} align="right">
+                DVD Inventory ID
               </TableCell>
-              <TableCell style={{ width: 160 }}>
-                Email
+              <TableCell style={{ width: 160 }} align="right">
+                Rental Date
               </TableCell>
-              <TableCell style={{ width: 160 }}>
-                Details
-              </TableCell>
+              <TableCell style={{ width: 160 }} align="right">
+                Return Date
+              </TableCell> 
             </TableRow>
 
           {
-            customersArray.filter((customer) => {
-            if (typeof customer[customersFilter] === 'string') {
-              return customer[customersFilter].toLowerCase().includes(search.toLowerCase());
-            } 
-            else if (typeof customer[customersFilter] === 'number') {
-              return customer[customersFilter].toString().includes(search);
-            }
-          }).slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((customer) => (
-            <TableRow key={customer.customer_id} onMouseEnter={() => handleMouseEnter(customer.customer_id)}
-            onMouseLeave={handleMouseLeave}
-            sx={{ backgroundColor: hoveredRowId === customer.customer_id ? 'lightgray' : 'transparent'}}>
-              <TableCell component="th" scope="row">
-                {customer.customer_id}
+            rentalsArray.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+            .map((rental) => (
+            <TableRow key={rental.rental_id}>
+              <TableCell align="right">
+                {rental.rental_id}
               </TableCell>
-              <TableCell component="th" scope="row">
-                {customer.first_name} {customer.last_name}
+              <TableCell align="right">
+                {rental.inventory_id}
               </TableCell>
-              <TableCell component="td" scope="row">
-                {customer.email}
+              <TableCell align="right">
+                {rental.rental_date}
               </TableCell>
-              <TableCell component="td" scope="row">
-                <CustomersPagePopup customer_id={customer.customer_id} customerFirst={customer.first_name} customerLast={customer.last_name} customerEmail={customer.email} joinDate={customer.create_date}/>
+              <TableCell align="right">
+                {rental.return_date}
               </TableCell>
             </TableRow>
-          ))}
-          
+          ))
+          }
         </TableBody>
+
         <TableFooter>
           <TableRow>
             <TablePagination
               rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
               colSpan={3}
-              count={customersArray.length}
+              count={rentalsArray.length}
               rowsPerPage={rowsPerPage}
               page={page}
               slotProps={{

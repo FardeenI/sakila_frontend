@@ -5,7 +5,6 @@ import { useState } from 'react'
 
 export default function BasicTextFields() {
     const [search, setSearch] = useState('')
-    console.log(search)
     
   return (
     <Box

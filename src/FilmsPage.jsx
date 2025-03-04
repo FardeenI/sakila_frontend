@@ -6,7 +6,7 @@ export default function FilmsPage() {
     return (
         <>
             <Navbar/>
-            <h1>This is the films page!</h1>
+            <h1>Films</h1>
             <FilmsPaginationSearchTable />
         </>
     )

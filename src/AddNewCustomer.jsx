@@ -110,7 +110,6 @@ export default function AddNewCustomer({onNewCustomer}) {
 
     // POST HERE
     const response =  await axios.post('http://127.0.0.1:8080/customers', body) // This is the post request
-    console.log(response.data)
     onNewCustomer(response.data)
     setButtonColor('#2e7d32');
     setFirstName(""); // Clear input after submission
@@ -153,9 +152,10 @@ export default function AddNewCustomer({onNewCustomer}) {
             <TextField id="customerEmail" label="Enter Email Address" fullWidth onChange={handleChangeEmail} value={email} error={errorEmail} helperText={helperTextEmail}/>
             <br></br>
             <br></br>
-            <Button variant="contained" sx={{backgroundColor: buttonColor, height:'7ch', }} onClick={handleSubmit} >
+            <Button variant="contained" sx={{backgroundColor: buttonColor, height:'7ch' }} onClick={handleSubmit} > 
                 Create Customer
             </Button>
+            {/* Add a popup success message here on valid customer create? */}
             </Box>
         </>
           </DialogContentText>

@@ -6,6 +6,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import ReturnFilm from './ReturnFilm';
+import RentalsPaginationTable from './RentalsPaginationTable';
 
 export default function CustomersPagePopup(props) {
     const [open, setOpen] = React.useState(false);
@@ -29,6 +30,7 @@ export default function CustomersPagePopup(props) {
                     onClose={handleClose}
                     aria-labelledby="alert-dialog-title"
                     aria-describedby="alert-dialog-description"
+                    sx={{ '& .MuiDialog-paper': { width: '1000px', maxWidth: '90vw' } }}
                 >
                     <DialogTitle id="alert-dialog-title" sx={{ fontWeight: 'bold', color:'black'}}>
                         Customer Details and History
@@ -51,6 +53,7 @@ export default function CustomersPagePopup(props) {
                         <br></br>
 
                         {/* Customer Rental History Pagination Table */}
+                        <RentalsPaginationTable customer_id={props.customer_id}/>
 
                         {/* Number Input form to return a film */} 
                         <ReturnFilm open={open} customer_id={props.customer_id}/>

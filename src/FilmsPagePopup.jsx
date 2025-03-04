@@ -78,7 +78,7 @@ export default function FilmDetailsPopup(props) {
             }
             <br></br>
             <br></br>
-            <NumberInputForm rentableFilms={rentableFilms} setPostFlag={setRentablesFlag}/> {/* In this component, we pass the function which changes the flag for keeping track of whether the rentable films array has been changed to the child component, the number input form*/}
+            <NumberInputForm open={open} rentableFilms={rentableFilms} setPostFlag={setRentablesFlag}/> {/* In this component, we pass the function which changes the flag for keeping track of whether the rentable films array has been changed to the child component, the number input form*/}
 
           </DialogContentText>
         </DialogContent>

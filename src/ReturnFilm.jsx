@@ -30,6 +30,7 @@ export default function ReturnFilm({open, customer_id}) {
   }, [])
 
   const [number, setNumber] = useState("");
+  const [buttonColor, setButtonColor] = useState('#1976d2');
 
   useEffect(() => {
     if (!open) {
@@ -37,6 +38,7 @@ export default function ReturnFilm({open, customer_id}) {
       setErrorDNE(false);
       setErrorReturned(false);
       setErrorOtherCustomer(false)
+      setButtonColor('#1976d2');
       setHelperText("");
     }
   }, [open]);
@@ -47,6 +49,7 @@ export default function ReturnFilm({open, customer_id}) {
     setErrorDNE(false);
     setErrorReturned(false);
     setErrorOtherCustomer(false)
+    setButtonColor('#1976d2');
     setHelperText("");
   };
 
@@ -60,12 +63,14 @@ export default function ReturnFilm({open, customer_id}) {
   // Reset all error states before validation
   setErrorDNE(false);
   setErrorReturned(false);
+  setButtonColor('#1976d2');
   setHelperText("");
 
   // Handle rental ID does not exist edge case
     const rentalExists = rentalIDs.some(obj => obj.rental_id === parseInt(number));
     if (!rentalExists) {
       setErrorDNE(true);
+      setButtonColor('#d32f2f');
       setHelperText("Rental ID does not exist");
       setNumber("");
       return;
@@ -75,6 +80,7 @@ export default function ReturnFilm({open, customer_id}) {
     const alreadyReturned = returnedIDs.some(obj => obj.rental_id === parseInt(number));
     if (alreadyReturned) {
       setErrorReturned(true);
+      setButtonColor('#d32f2f');
       setHelperText("Rental has already been returned");
       setNumber("");
       return;
@@ -83,12 +89,13 @@ export default function ReturnFilm({open, customer_id}) {
     if (number.trim() !== "") {
       try {
         const body = {"rental_id": parseInt(number)};
-        console.log(body)
         const response = await axios.put(`http://127.0.0.1:8080/returnMovie/${customer_id}`, body);
-        console.log("Response:", response.data);
+        setButtonColor('#2e7d32');
+        setHelperText("Successfully returned DVD")
         if (response.data.affectedRows === 0) {
           setErrorOtherCustomer(true)
           setHelperText("Cannot return another customer's film copy")
+          setButtonColor('#d32f2f');
         }
 
         // Reset input field
@@ -109,7 +116,7 @@ export default function ReturnFilm({open, customer_id}) {
       autoComplete="off"
     >
       <TextField id="returnMovie" label="Enter Rental ID" variant="outlined" value={number} onChange={handleChange} error={errorDNE || errorReturned || errorOtherCustomer} helperText={helperText}/>
-      <Button variant="contained" sx={{height:'7ch'}} onClick={handleSubmit}>
+      <Button variant="contained" sx={{backgroundColor: buttonColor, height:'7ch' }} onClick={handleSubmit}>
         Return Movie
       </Button>
     </Box>
