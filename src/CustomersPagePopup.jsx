@@ -7,6 +7,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import ReturnFilm from './ReturnFilm';
 import RentalsPaginationTable from './RentalsPaginationTable';
+import EditCustomerDetails from './EditCustomerDetails';
 
 export default function CustomersPagePopup(props) {
     const [open, setOpen] = React.useState(false);
@@ -55,11 +56,13 @@ export default function CustomersPagePopup(props) {
                         {/* Customer Rental History Pagination Table */}
                         <RentalsPaginationTable customer_id={props.customer_id}/>
 
+                        <div style={{display:'flex'}}>
                         {/* Number Input form to return a film */} 
                         <ReturnFilm open={open} customer_id={props.customer_id}/>
                         
                         {/* Edit Details Popup */} {/* Delete Customer Popup */}
-
+                        <EditCustomerDetails customer_id={props.customer_id} customerFirst={props.customerFirst} customerLast={props.customerLast} customerEmail={props.customerEmail}/>
+                        </div>
 
                         </DialogContentText>
                     </DialogContent>

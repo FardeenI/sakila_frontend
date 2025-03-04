@@ -131,9 +131,10 @@ export default function CustomersPaginationSearchTable() {
   return (
     <>
     <Navbar/>
-    <h1>Customers <AddNewCustomer onNewCustomer={handleNewCustomer}/> </h1>
+    <h1>Customers</h1>
 
-    <div style={{display:"flex", float:"right"}}>
+    <div style={{display:"flex", float:"right", display:'flex'}}>
+    <AddNewCustomer onNewCustomer={handleNewCustomer}/>
     <Box
       component="form"
       sx={{ '& > :not(style)': { m: 1, width: '25ch' } }}

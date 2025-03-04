@@ -11,33 +11,14 @@ import Box from '@mui/material/Box';
 import axios from 'axios';
 
 
-export default function AddNewCustomer({onNewCustomer}) {
+export default function EditCustomerDetails(props) {
   const [open, setOpen] = React.useState(false);
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-
-    // Reset all fields and errors when closing the form
-    setFirstName("");
-    setLastName("");
-    setEmail("");
-    setErrorFirst(false);
-    setErrorLast(false);
-    setErrorEmail(false);
-    setHelperTextFirst("");
-    setHelperTextLast("");
-    setHelperTextEmail("");
-    setButtonColor('#1976d2');
-  };
-
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
+  const [firstName, setFirstName] = useState(props.customerFirst);
+  const [lastName, setLastName] = useState(props.customerLast);
+  const [email, setEmail] = useState(props.customerEmail);
   const [buttonColor, setButtonColor] = useState('#1976d2');
+
   const body = {"first_name":firstName, "last_name":lastName, "email":email} 
 
   const [errorFirst, setErrorFirst] = useState(false);
@@ -48,6 +29,26 @@ export default function AddNewCustomer({onNewCustomer}) {
   const [helperTextLast, setHelperTextLast] = useState("");
   const [helperTextEmail, setHelperTextEmail] = useState("");
 
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+
+    // Reset all fields and errors when closing the form
+    setFirstName(props.customerFirst);
+    setLastName(props.customerLast);
+    setEmail(props.customerEmail);
+    setErrorFirst(false);
+    setErrorLast(false);
+    setErrorEmail(false);
+    setHelperTextFirst("");
+    setHelperTextLast("");
+    setHelperTextEmail("");
+    setButtonColor('#1976d2');
+  };
+
   const handleChangeFirst = (e) => {
     const value = e.target.value;
     setFirstName(value);
@@ -55,6 +56,7 @@ export default function AddNewCustomer({onNewCustomer}) {
     if (value.trim() !== "") {
         setErrorFirst(false);
         setHelperTextFirst("");
+        setButtonColor('#1976d2');
     }
   };
 
@@ -65,6 +67,7 @@ export default function AddNewCustomer({onNewCustomer}) {
       if (value.trim() !== "") {
           setErrorLast(false);
           setHelperTextLast("");
+          setButtonColor('#1976d2');
       }
   };
 
@@ -75,6 +78,7 @@ export default function AddNewCustomer({onNewCustomer}) {
       if (value.trim() !== "") {
           setErrorEmail(false);
           setHelperTextEmail("");
+          setButtonColor('#1976d2');
       }
   };  
 
@@ -109,9 +113,9 @@ export default function AddNewCustomer({onNewCustomer}) {
     }
 
     // POST HERE
-    const response =  await axios.post('http://127.0.0.1:8080/customers', body) // This is the post request
-    onNewCustomer(response.data)
+    const response =  await axios.put(`http://127.0.0.1:8080/updateCustomer/${props.customer_id}`, body) // This is the post request
     setButtonColor('#2e7d32');
+    props.onNewCustomer(response.data)
     setFirstName(""); // Clear input after submission
     setLastName("");
     setEmail("");
@@ -122,7 +126,7 @@ export default function AddNewCustomer({onNewCustomer}) {
   return (
     <React.Fragment>
       <Button variant="outlined" onClick={handleClickOpen} sx={{height:'7ch', margin:'8px'}}>
-        Add Customer
+        Edit Details
       </Button>
       <Dialog
         open={open}
@@ -131,7 +135,7 @@ export default function AddNewCustomer({onNewCustomer}) {
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title" sx={{ fontWeight: 'bold', color:'black'}}>
-          Customer Sign Up
+          Edit Customer Details
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
@@ -152,8 +156,8 @@ export default function AddNewCustomer({onNewCustomer}) {
             <TextField id="customerEmail" label="Enter Email Address" fullWidth onChange={handleChangeEmail} value={email} error={errorEmail} helperText={helperTextEmail}/>
             <br></br>
             <br></br>
-            <Button variant="contained" sx={{backgroundColor: buttonColor, height:'7ch' }} onClick={handleSubmit} > 
-                Create Customer
+            <Button variant="contained" sx={{backgroundColor: buttonColor, height:'7ch'}} onClick={handleSubmit} > 
+                Update Customer Details
             </Button>
             {/* Add a popup success message here on valid customer create? */}
             </Box>
