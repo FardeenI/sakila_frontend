@@ -7,7 +7,6 @@ import FilmsPage from './FilmsPage.jsx'
 import React from 'react'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import NotFoundPage from './NotFoundPage.jsx'
-import Scrap from './scrap.jsx'
 import CustomersPaginationSearchTable from './CustomersPaginationSearchTable.jsx'
 
 const router = createBrowserRouter([
@@ -23,10 +22,6 @@ const router = createBrowserRouter([
   {
     path:'/customers',
     element: <CustomersPaginationSearchTable />
-  },
-  {
-    path:'/scrap',
-    element: <Scrap />
   }
 ])
 

@@ -54,14 +54,11 @@ export default function CustomersPagePopup(props) {
                         <br></br>
                         <br></br>
 
-                        {/* Customer Rental History Pagination Table */}
                         <RentalsPaginationTable customer_id={props.customer_id}/>
 
                         <div style={{display:'flex'}}>
-                        {/* Number Input form to return a film */} 
                         <ReturnFilm open={open} customer_id={props.customer_id}/>
                         
-                        {/* Edit Details Popup */} {/* Delete Customer Popup */}
                         <EditCustomerDetails customer_id={props.customer_id} customerFirst={props.customerFirst} customerLast={props.customerLast} customerEmail={props.customerEmail}/>
                         
                         <DeleteCustomer customer_id={props.customer_id} customerFirst={props.customerFirst} customerLast={props.customerLast} onDeleteCustomer={props.onDeleteCustomer}/>
