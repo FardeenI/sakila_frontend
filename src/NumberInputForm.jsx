@@ -64,6 +64,7 @@ export default function NumberInputForm(props) {
         setError(true)
         setButtonColor('#d32f2f');
         setHelperText("Invalid Customer ID")
+        setNumber("");
         return
       }
       setNumber(""); // Clear input after submission

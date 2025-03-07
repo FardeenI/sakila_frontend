@@ -48,6 +48,14 @@ export default function AddNewCustomer({onNewCustomer}) {
   const [helperTextLast, setHelperTextLast] = useState("");
   const [helperTextEmail, setHelperTextEmail] = useState("");
 
+  const isAlpha = (str) => {
+    return /^[a-zA-Z]+$/.test(str);
+  };
+
+  const isEmail = (str) => {
+    return /^\S+@\S+\.\S+$/.test(str);
+  };
+
   const handleChangeFirst = (e) => {
     const value = e.target.value;
     setFirstName(value);
@@ -102,11 +110,29 @@ export default function AddNewCustomer({onNewCustomer}) {
         setHelperTextEmail("Must enter Email")
         validEmail = false
     }
-    
-    if (!validFirst || !validLast || !validEmail) {
-        setButtonColor('#d32f2f');
-        return
+
+    if (!isAlpha(firstName)) {
+        setErrorFirst(true)
+        validFirst = false
+        setHelperTextFirst("First names must be alphabetic")
     }
+
+    if (!isAlpha(lastName)) {
+        setErrorLast(true)
+        validLast = false
+        setHelperTextLast("Last names must be alphabetic")
+    }
+
+    if (!isEmail(email)) {
+        setErrorEmail(true)
+        validEmail = false
+        setHelperTextEmail("Email must be in the form of an email")
+    }
+
+    if (!validFirst || !validLast || !validEmail) {
+      setButtonColor('#d32f2f');
+      return
+  }
 
     // POST HERE
     const response =  await axios.post('http://127.0.0.1:8080/customers', body) // This is the post request
@@ -117,7 +143,7 @@ export default function AddNewCustomer({onNewCustomer}) {
     setEmail("");
   };
 
-  
+  {/* ADD CHECKING FOR THE INPUT FIELDS TO MAKE SURE FIRST NAME AND LAST NAME ARE ALPHA AND EMAIL HOLDS FORM OF EMAIL */}
 
   return (
     <React.Fragment>

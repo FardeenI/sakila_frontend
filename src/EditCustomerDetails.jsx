@@ -29,6 +29,14 @@ export default function EditCustomerDetails(props) {
   const [helperTextLast, setHelperTextLast] = useState("");
   const [helperTextEmail, setHelperTextEmail] = useState("");
 
+  const isAlpha = (str) => {
+    return /^[a-zA-Z]+$/.test(str);
+  };
+
+  const isEmail = (str) => {
+    return /^\S+@\S+\.\S+$/.test(str);
+  };
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -107,6 +115,24 @@ export default function EditCustomerDetails(props) {
         validEmail = false
     }
     
+    if (!isAlpha(firstName)) {
+      setErrorFirst(true)
+      validFirst = false
+      setHelperTextFirst("First names must be alphabetic")
+  }
+
+  if (!isAlpha(lastName)) {
+      setErrorLast(true)
+      validLast = false
+      setHelperTextLast("Last names must be alphabetic")
+  }
+
+  if (!isEmail(email)) {
+      setErrorEmail(true)
+      validEmail = false
+      setHelperTextEmail("Email must be in the form of an email")
+  }
+
     if (!validFirst || !validLast || !validEmail) {
         setButtonColor('#d32f2f');
         return
@@ -120,7 +146,7 @@ export default function EditCustomerDetails(props) {
     setEmail("");
   };
 
-  
+  {/* ADD CHECKING FOR THE INPUT FIELDS TO MAKE SURE FIRST NAME AND LAST NAME ARE ALPHA AND EMAIL HOLDS FORM OF EMAIL */}
 
   return (
     <React.Fragment>
