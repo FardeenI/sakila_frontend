@@ -128,12 +128,16 @@ export default function CustomersPaginationSearchTable() {
     setCustomersArray([...customersArray, customer])
   };
 
+  const handleDeleteCustomer = (customer) => {
+    setCustomersArray([...customersArray, customer])
+  };
+
   return (
     <>
     <Navbar/>
     <h1>Customers</h1>
 
-    <div style={{display:"flex", float:"right", display:'flex'}}>
+    <div style={{display:"flex", float:"right"}}>
     <AddNewCustomer onNewCustomer={handleNewCustomer}/>
     <Box
       component="form"
@@ -201,7 +205,7 @@ export default function CustomersPaginationSearchTable() {
                 {customer.email}
               </TableCell>
               <TableCell component="td" scope="row">
-                <CustomersPagePopup customer_id={customer.customer_id} customerFirst={customer.first_name} customerLast={customer.last_name} customerEmail={customer.email} joinDate={customer.create_date}/>
+                <CustomersPagePopup customer_id={customer.customer_id} customerFirst={customer.first_name} customerLast={customer.last_name} customerEmail={customer.email} joinDate={customer.create_date} onDeleteCustomer={handleDeleteCustomer}/>
               </TableCell>
             </TableRow>
           ))}

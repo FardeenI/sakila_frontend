@@ -115,7 +115,6 @@ export default function EditCustomerDetails(props) {
     // POST HERE
     const response =  await axios.put(`http://127.0.0.1:8080/updateCustomer/${props.customer_id}`, body) // This is the post request
     setButtonColor('#2e7d32');
-    props.onNewCustomer(response.data)
     setFirstName(""); // Clear input after submission
     setLastName("");
     setEmail("");

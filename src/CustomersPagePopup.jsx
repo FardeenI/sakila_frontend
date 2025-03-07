@@ -8,6 +8,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import ReturnFilm from './ReturnFilm';
 import RentalsPaginationTable from './RentalsPaginationTable';
 import EditCustomerDetails from './EditCustomerDetails';
+import DeleteCustomer from './DeleteCustomer';
 
 export default function CustomersPagePopup(props) {
     const [open, setOpen] = React.useState(false);
@@ -62,6 +63,8 @@ export default function CustomersPagePopup(props) {
                         
                         {/* Edit Details Popup */} {/* Delete Customer Popup */}
                         <EditCustomerDetails customer_id={props.customer_id} customerFirst={props.customerFirst} customerLast={props.customerLast} customerEmail={props.customerEmail}/>
+                        
+                        <DeleteCustomer customer_id={props.customer_id} customerFirst={props.customerFirst} customerLast={props.customerLast} onDeleteCustomer={props.onDeleteCustomer}/>
                         </div>
 
                         </DialogContentText>
