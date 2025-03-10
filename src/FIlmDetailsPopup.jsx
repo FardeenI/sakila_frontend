@@ -19,7 +19,7 @@ export default function FilmDetailsPopup(props) {
 
   return (
     <React.Fragment>
-      <Button variant="outlined" onClick={handleClickOpen}>
+      <Button variant="outlined" onClick={handleClickOpen} sx={{ fontWeight: 'bold', fontSize: '1rem', borderWidth: 2, borderColor: 'black', padding: '6px 16px', margin: '10px'}}>
         View Details
       </Button>
       <Dialog
