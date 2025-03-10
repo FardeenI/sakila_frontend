@@ -41,16 +41,16 @@ export default function CustomersPagePopup(props) {
                     <DialogContent>
                         <DialogContentText id="alert-dialog-description">
                         {/* Customer Details Text Line Item(s) */}
-                        <span style={{ fontWeight: 'bold', color:'black'}}>Customer First Name: {props.customerFirst}</span>
+                        <span style={{ fontWeight: 'bold', color:'black'}}>Customer First Name: </span>{props.customerFirst}
                         <br></br>
                         <br></br>
-                        <span style={{ fontWeight: 'bold' , color:'black'}}>Customer Last Name: {props.customerLast}</span>
+                        <span style={{ fontWeight: 'bold' , color:'black'}}>Customer Last Name: </span>{props.customerLast}
                         <br></br>
                         <br></br>
-                        <span style={{ fontWeight: 'bold' , color:'black'}}>Customer Email: {props.customerEmail}</span>
+                        <span style={{ fontWeight: 'bold' , color:'black'}}>Customer Email: </span>{props.customerEmail}
                         <br></br>
                         <br></br>
-                        <span style={{ fontWeight: 'bold' , color:'black'}}>Member Since: {props.joinDate} GMT</span>
+                        <span style={{ fontWeight: 'bold' , color:'black'}}>Member Since: </span>{props.joinDate} GMT
                         <br></br>
                         <br></br>
 

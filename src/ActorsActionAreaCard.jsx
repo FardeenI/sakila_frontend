@@ -8,7 +8,7 @@ import ActorDetailsPopup from './ActorDetailsPopup';
 
 export default function ActorsActionAreaCard(props) {
   return (
-    <Card sx={{ maxWidth: 220, minWidth: 180, margin: 1, height: '100%' }}>
+    <Card sx={{ maxWidth: 220, minWidth: 180, margin: 2, height: '100%' }}>
       <CardActionArea>
         <CardMedia
           component="img"
@@ -19,7 +19,7 @@ export default function ActorsActionAreaCard(props) {
           <Typography gutterBottom variant="h5" component="div">
             {props.actorName}
           </Typography>
-          <div style={{fontWeight:'bold'}}>Movies: {props.rented}</div>
+          <span style={{fontWeight:'bold'}}>Movies: </span>{props.rented}
           <ActorDetailsPopup actorName={props.actorName} actorID={props.actorID}/>
         </CardContent>
       </CardActionArea>

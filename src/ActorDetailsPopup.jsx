@@ -46,19 +46,16 @@ export default function ActorDetailsPopup(props) {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title" sx={{ fontWeight: 'bold', color:'black'}}>
-          {actorName}
-        </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-          <h2 style={{ fontWeight: 'bold' , color:'black'}}>Here are the Top 5 {actorName} Films:</h2>
+          <h2 style={{ fontWeight: 'bold' , color:'black'}}>Top 5 {actorName} Films:</h2>
             <div>
             {
                 actorsTop5.map((film, index) => (
                     <div key={index}>
                     <span key={index} style={{ fontWeight: 'bold' , color:'black'}}>{film.title}</span>
                     <br></br>
-                    <span key={index} style={{ fontWeight: 'bold' , color:'black'}}> Rented: {film.rental_count} </span>
+                    <span key={index} style={{ color:'black'}}> Rented: {film.rental_count} </span>
                     <br></br>
                     <br></br>
                     </div>

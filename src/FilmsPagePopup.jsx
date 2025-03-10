@@ -52,28 +52,28 @@ export default function FilmDetailsPopup(props) {
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            <span style={{ fontWeight: 'bold', color:'black'}}>Description: {props.filmDescription}</span>
+            <span style={{ fontWeight: 'bold', color:'black'}}>Description: </span>{props.filmDescription}
             <br></br>
             <br></br>
-            <span style={{ fontWeight: 'bold' , color:'black'}}>Release Year: {props.filmRelease}</span>
+            <span style={{ fontWeight: 'bold' , color:'black'}}>Release Year: </span>{props.filmRelease}
             <br></br>
             <br></br>
-            <span style={{ fontWeight: 'bold' , color:'black'}}>Rental Rate: {props.filmRental}</span>
+            <span style={{ fontWeight: 'bold' , color:'black'}}>Rental Rate: </span>{props.filmRental}
             <br></br>
             <br></br>
-            <span style={{ fontWeight: 'bold' , color:'black'}}>Length: {props.filmLength} minutes</span>
+            <span style={{ fontWeight: 'bold' , color:'black'}}>Length: </span>{props.filmLength} minutes
             <br></br>
             <br></br>
-            <span style={{ fontWeight: 'bold' , color:'black'}}>Replacement Cost: {props.filmReplacement}</span>
+            <span style={{ fontWeight: 'bold' , color:'black'}}>Replacement Cost: </span>{props.filmReplacement}
             <br></br>
             <br></br>
-            <span style={{ fontWeight: 'bold' , color:'black'}}>Special Features: {props.filmFeatures}</span>
+            <span style={{ fontWeight: 'bold' , color:'black'}}>Special Features: </span>{props.filmFeatures}
             <br></br>
             <br></br>
             <span style={{ fontWeight: 'bold' , color:'black'}}>Available Inventory IDs: </span>
             {
                 rentableFilms.map((rentableFilmID, index) => (
-                  <span key={index} style={{ fontWeight: 'bold' , color:'black'}}>{rentableFilmID.rentableID}  |  </span>
+                  <span key={index} >{rentableFilmID.rentableID}  |  </span>
                 ))
             }
             <br></br>
