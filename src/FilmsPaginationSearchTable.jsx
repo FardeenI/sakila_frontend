@@ -152,23 +152,23 @@ export default function FilmsPaginationSearchTable() {
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
         <TableBody>
-            <TableRow key={"film_columns"}>
-              <TableCell style={{ width: 160 }} align="right">
+            <TableRow key={"film_columns"} style={{backgroundColor:'#1976d2'}}>
+              <TableCell style={{ width: 160, fontWeight:'bold',color:'white'}} align="right">
                 ID
               </TableCell>
-              <TableCell style={{ width: 160 }} align="right">
+              <TableCell style={{ width: 160, fontWeight:'bold',color:'white'}} align="right">
                 Title
               </TableCell>
-              <TableCell style={{ width: 160 }} align="right">
+              <TableCell style={{ width: 160, fontWeight:'bold',color:'white' }} align="right">
                 Description
               </TableCell>
-              <TableCell style={{ width: 160 }} align="right">
+              <TableCell style={{ width: 160, fontWeight:'bold',color:'white'}} align="right">
                 Genre
               </TableCell>
-              <TableCell style={{ width: 160 }} align="right">
+              <TableCell style={{ width: 160, fontWeight:'bold',color:'white' }} align="right">
                 Rating
               </TableCell>
-              <TableCell style={{ width: 160 }} align="right">
+              <TableCell style={{ width: 160, fontWeight:'bold',color:'white'}} align="right">
                 Details
               </TableCell>  
             </TableRow>
@@ -182,22 +182,22 @@ export default function FilmsPaginationSearchTable() {
             <TableRow key={film.title+film.actor_name} onMouseEnter={() => handleMouseEnter(film.film_id)}
             onMouseLeave={handleMouseLeave}
             sx={{ backgroundColor: hoveredRowId === film.film_id ? 'lightgray' : 'transparent'}}>
-              <TableCell align="right">
+              <TableCell align="right" style={{fontWeight:'bold', color:'#1976d2'}}>
                 {film.film_id}
               </TableCell>
-              <TableCell align="right">
+              <TableCell align="right" style={{color:'#1976d2', fontStyle:'italic'}}>
                 {film.title}
               </TableCell>
-              <TableCell align="right">
+              <TableCell align="right" style={{color:'#1976d2'}}>
                 {film.description}
               </TableCell>
-              <TableCell align="right">
+              <TableCell align="right" style={{color:'#1976d2'}}>
                 {film.genre}
               </TableCell>
-              <TableCell align="right">
+              <TableCell align="right" style={{color:'#1976d2'}}>
                 {film.rating}
               </TableCell>
-              <TableCell align="right">
+              <TableCell align="right" style={{color:'#1976d2'}}>
                 <FilmsPagePopup filmID={film.film_id} filmTitle={film.title} filmDescription={film.description} filmRelease={film.release_year} filmRental={film.rental_rate} filmLength={film.length} filmReplacement={film.replacement_cost} filmFeatures={film.special_features}/>
               </TableCell>
             </TableRow>
@@ -222,6 +222,7 @@ export default function FilmsPaginationSearchTable() {
                   native: true,
                 },
               }}
+              
               onPageChange={handleChangePage}
               onRowsPerPageChange={handleChangeRowsPerPage}
               ActionsComponent={TablePaginationActions}

@@ -135,7 +135,7 @@ export default function CustomersPaginationSearchTable() {
   return (
     <>
     <Navbar/>
-    <h1>Customers</h1>
+    <h1 style={{color:"#1976d2"}}>Customers</h1>
 
     <div style={{display:"flex", float:"right"}}>
     <AddNewCustomer onNewCustomer={handleNewCustomer}/>
@@ -168,17 +168,17 @@ export default function CustomersPaginationSearchTable() {
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 300 }} aria-label="custom pagination table">
         <TableBody>
-            <TableRow key={"film_columns"}>
-              <TableCell style={{ width: 160 }} component="th" scope="row">
+            <TableRow key={"film_columns"} style={{backgroundColor:'#1976d2'}}>
+              <TableCell style={{ width: 160, fontWeight:'bold',color:'white' }} component="th" scope="row">
                 ID
               </TableCell>
-              <TableCell style={{ width: 160 }}>
+              <TableCell style={{ width: 160, fontWeight:'bold',color:'white'}}>
                 Name
               </TableCell>
-              <TableCell style={{ width: 160 }}>
+              <TableCell style={{ width: 160, fontWeight:'bold',color:'white'}}>
                 Email
               </TableCell>
-              <TableCell style={{ width: 160 }}>
+              <TableCell style={{ width: 160, fontWeight:'bold',color:'white'}}>
                 Details
               </TableCell>
             </TableRow>
@@ -195,16 +195,16 @@ export default function CustomersPaginationSearchTable() {
             <TableRow key={customer.customer_id} onMouseEnter={() => handleMouseEnter(customer.customer_id)}
             onMouseLeave={handleMouseLeave}
             sx={{ backgroundColor: hoveredRowId === customer.customer_id ? 'lightgray' : 'transparent'}}>
-              <TableCell component="th" scope="row">
+              <TableCell component="th" scope="row" style={{fontWeight:'bold', color:'#1976d2'}}>
                 {customer.customer_id}
               </TableCell>
-              <TableCell component="th" scope="row">
+              <TableCell component="th" scope="row" style={{color:'#1976d2'}}>
                 {customer.first_name} {customer.last_name}
               </TableCell>
-              <TableCell component="td" scope="row">
+              <TableCell component="td" scope="row" style={{color:'#1976d2', fontStyle:'italic'}}>
                 {customer.email}
               </TableCell>
-              <TableCell component="td" scope="row">
+              <TableCell component="td" scope="row" style={{fontWeight:'bold', color:'#1976d2'}}>
                 <CustomersPagePopup customer_id={customer.customer_id} customerFirst={customer.first_name} customerLast={customer.last_name} customerEmail={customer.email} joinDate={customer.create_date} onDeleteCustomer={handleDeleteCustomer}/>
               </TableCell>
             </TableRow>

@@ -6,7 +6,7 @@ export default function FilmsPage() {
     return (
         <>
             <Navbar/>
-            <h1>Films</h1>
+            <h1 style={{color:"#1976d2"}}>Films</h1>
             <FilmsPaginationSearchTable />
         </>
     )

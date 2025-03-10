@@ -33,23 +33,23 @@ export default function LandingPage() {
     return (
         <>
             <Navbar/>
-            <h1>Sakila Website</h1>
-            <h2>Here are the Top 5 Films:</h2>
+            <h1 style={{color:"#1976d2"}}>Sakila Website</h1>
+            <h2 style={{color:"#1976d2"}}>Here are the Top 5 Films:</h2>
             <Box sx={{ 
                     display: 'flex', 
                     flexDirection: 'row', 
-                    p: 0, 
-                    m: 10, 
+                    m: 5, 
                     bgcolor: 'background.paper', 
                     borderRadius: 1, 
+                    justifyContent: 'center'
                 }}
             >
             {
                 top5FilmsArray.map((film, index) => (
-                    <div key={index} style={{padding:"10px", backgroundColor:"#D5FFFF", margin:"10px", borderStyle:"solid", borderWidth:"4px", borderColor:"black"}}>
-                    <span style={{ fontWeight: 'bold', color:'black'}}>{film.title}</span>
+                    <div key={index} style={{padding:"10px", margin:"10px", borderStyle:"solid", borderWidth:"1px", borderRadius:'4px', borderColor:"#1976d2"}}>
+                    <span style={{ color:'#1976d2'}}>{film.title}</span>
                     <br></br>
-                    <span style={{ fontWeight: 'bold', color:'black'}}> Rented: {film.rented} </span>
+                    <span style={{ color:'#1976d2'}}> Rented: {film.rented} </span>
                     <br></br>
                     <span><FilmDetailsPopup filmDescription={film.description} filmRelease={film.release_year} filmRating={film.rating} filmTitle={film.title} rentedCount={film.rented} filmGenre={film.genre}/></span>
                     <br></br>
@@ -58,22 +58,23 @@ export default function LandingPage() {
                 ))
             }
             </Box>
-            <h2>Here are the Top 5 Actors:</h2>
+
+            <h2 style={{color:"#1976d2"}}>Here are the Top 5 Actors:</h2>
             <Box sx={{ 
                     display: 'flex', 
                     flexDirection: 'row', 
-                    p: 0, 
-                    m: 10, 
+                    m: 5, 
                     bgcolor: 'background.paper', 
                     borderRadius: 1, 
+                    justifyContent: 'center'
                 }}
             >
                 {
                     top5ActorsArray.map((actor, index) => (
-                        <div key={index} style={{padding:"10px", backgroundColor:"#ffe4ed", margin:"10px", borderStyle:"solid", borderWidth:"4px", borderColor:"black"}}>
-                        <span style={{ fontWeight: 'bold', color:'black'}}>{actor.first_name} {actor.last_name}</span>
+                        <div key={index} style={{padding:"10px", margin:"10px", borderStyle:"solid", borderWidth:"1px", borderRadius:'4px', borderColor:"#1976d2"}}>
+                        <span style={{color:'#1976d2'}}>{actor.first_name} {actor.last_name}</span>
                         <br></br>
-                        <span style={{ fontWeight: 'bold', color:'black'}}> Rented: {actor.rented} </span>
+                        <span style={{color:'#1976d2'}}> Rented: {actor.rented} </span>
                         <br></br>
                         <span><ActorDetailsPopup actorName={`${actor.first_name} ${actor.last_name}`} actorID={actor.actor_id}/></span>
                         <br></br>
