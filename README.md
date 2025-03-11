@@ -1,1 +1,1 @@
-This repository contains the source code for the frontend of my implementation of the NJIT Spring '25 CS490-104 Individual Project (Sakila Database Store Clerk Web Interface), currently supporting 7 of the 14 total deliverables. This frontend utilizes React js. Ongoing development from Milestone 2 to Milestone 3.
+This repository contains the source code for the frontend of my implementation of the NJIT Spring '25 CS490-104 Individual Project (Sakila Database Store Clerk Web Interface) This frontend utilizes React js.
