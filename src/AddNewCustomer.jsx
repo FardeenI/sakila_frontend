@@ -98,11 +98,21 @@ export default function AddNewCustomer({onNewCustomer}) {
         setHelperTextFirst("Must enter First Name")
         validFirst = false
     }
+    else if (!isAlpha(firstName)) {
+      setErrorFirst(true)
+      validFirst = false
+      setHelperTextFirst("First names must be alphabetic")
+    }
 
     if (lastName === "") { // Fill in with edge case condition
         setErrorLast(true)
         setHelperTextLast("Must enter Last Name")
         validLast = false
+    }
+    else if (!isAlpha(lastName)) {
+      setErrorLast(true)
+      validLast = false
+      setHelperTextLast("Last names must be alphabetic")
     }
 
     if (email === "") { // Fill in with edge case condition
@@ -110,24 +120,12 @@ export default function AddNewCustomer({onNewCustomer}) {
         setHelperTextEmail("Must enter Email")
         validEmail = false
     }
-
-    if (!isAlpha(firstName)) {
-        setErrorFirst(true)
-        validFirst = false
-        setHelperTextFirst("First names must be alphabetic")
+    else if (!isEmail(email)) {
+      setErrorEmail(true)
+      validEmail = false
+      setHelperTextEmail("Email must be in the form of an email")
     }
-
-    if (!isAlpha(lastName)) {
-        setErrorLast(true)
-        validLast = false
-        setHelperTextLast("Last names must be alphabetic")
-    }
-
-    if (!isEmail(email)) {
-        setErrorEmail(true)
-        validEmail = false
-        setHelperTextEmail("Email must be in the form of an email")
-    }
+    
 
     if (!validFirst || !validLast || !validEmail) {
       setButtonColor('#d32f2f');
